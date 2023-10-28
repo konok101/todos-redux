@@ -5,20 +5,23 @@ import { getAllTodos } from './actions/todoActions';
 const Todos = () => {
     const {isloading, todos, error}= useSelector((state)=> state)
 
-    const dispatch=useDispatch()
+    console.log("todos", todos);
 
-    useEffect(()=>{
+    const dispatch = useDispatch();
 
-        dispatch(getAllTodos)
-
-    }, [])
+    useEffect(() => {
+      dispatch(getAllTodos());
+    }, []);
     return (
-        <div>
-            <h1>This is todos app</h1>
+      <div>
+        <h1>This is todos app</h1>
 
-            {isloading && <p>loading</p>}
-
-        </div>
+        {isloading && <p>loading</p>}
+        {error && <p>This is error</p>}
+        {todos.map((todo) => (
+          <p>{todo?.title}</p>
+        ))}
+      </div>
     );
 };
 
